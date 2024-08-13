@@ -1,0 +1,17 @@
+#To delete the .edb file we must stop the service "WSearch"
+Stop-Service -Name 'WSearch' -Force 
+
+#Sleep time to make sure that the services are stopped
+Start-Sleep -Seconds 5 
+
+#Path for the .edb file with Remove switch
+Remove-Item -Path "C:\ProgramData\Microsoft\Search\Data\Applications\Windows\Windows.edb" -Force 
+ 
+#Again sleep time to make sure the file is removed
+Start-Sleep -Seconds 5 
+
+#now it's time to start the service, so Windows Search can work
+Start-Service -Name 'WSearch' 
+
+#You can use this, if you whish to opt for the Output
+Write-Output "The Windows Search service has been restarted and the Windows.edb file has been deleted." 
